@@ -14,12 +14,18 @@ const personSchema = new mongoose.Schema({
     required: true,
   },
   age: Number,
-  favoriteFoods: [String]
+  favoriteFoods: [String],
 });
 
-let Person =mongoose.model('Person', personSchema);
+let Person = mongoose.model("Person", personSchema);
+
+//Crear y guardar un registro de un modelo
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const newPerson=new Person({
+    name: 'Will Riker',
+    rank: 'Commander'
+  })
+  done(null , newPerson.save());
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
