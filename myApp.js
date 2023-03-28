@@ -26,8 +26,13 @@ const createAndSavePerson = (done) => {
     age: 21,
     favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
   });
-
-  done(null, newPerson.save());
+  newPerson.save(function (err, person) {
+    if (err) {
+      console.log(err);
+    }
+    console.log(`${person.name} saved to database`);
+  });
+  done(null, newPerson);
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
