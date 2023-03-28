@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-//Crear un modelo
+//Crear y asignar un modelo
 const personSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,7 +17,7 @@ const personSchema = new mongoose.Schema({
   favoriteFoods: [String]
 });
 
-let Person = personSchema;
+let Person =mongoose.model(personSchema);
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
 };
