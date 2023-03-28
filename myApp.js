@@ -19,22 +19,17 @@ const personSchema = new mongoose.Schema({
 
 let Person = mongoose.model("Person", personSchema);
 
-
 //Crear y guardar un registro de un modelo
 const createAndSavePerson = (done) => {
   const newPerson = new Person({
     name: "Will Riker",
     age: 21,
-    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"]
+    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
   });
   newPerson.save(function (err, person) {
-    if (err) {
-      console.error(err);
-    }
-    console.log(`${person.name} saved to database`);
-   done(null, person); 
+    err ? console.error(err) : console.log(`${person.name} saved to database`);
+    done(null, person);
   });
-  
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
