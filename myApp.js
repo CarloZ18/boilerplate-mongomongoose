@@ -43,12 +43,12 @@ let arrayOfPeople = [
   {
     name: "Freddy Sojo",
     age: 21,
-    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
+    favoriteFoods: ["Empanada", "Arepa", "Sushi"],
   },
   {
     name: "Carlos Mata",
     age: 21,
-    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
+    favoriteFoods: ["Pizza", "Hamburguesa", "Parrilla"],
   },
 ];
 
@@ -59,9 +59,9 @@ const createManyPeople = (arrayOfPeople, done) => {
   });
 };
 
-//Use model.find() para buscar en su base de datos
+//Use model.find() para buscar en su base de datos todos los documentos que coinciden
 
-let personName=/\s(sojo)$/ //Personas cuyo apellido es Sojo
+let personName=/^(freddy)/i //Personas cuyo apellido es Sojo
 
 const findPeopleByName = (personName, done) => {
   Person.find({name:personName},(err,data)=>{
@@ -70,9 +70,16 @@ const findPeopleByName = (personName, done) => {
  })
 };
 
+//Use model.findOne() para devolver un único documento coincidente de su base de datos
+
+let food=/parrilla/i
+
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
-};
+  Person.findOne({favoriteFoods:food},(err,data)=>{
+    err ? console.error(err) : console.log(`${data.name} finded to database`);
+   done(null, data);
+ })
+}
 
 const findPersonById = (personId, done) => {
   done(null /*, data*/);
