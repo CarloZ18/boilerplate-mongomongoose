@@ -48,8 +48,9 @@ let arrayOfPeople = [
     favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
   },
 ];
+createManyPeople(arrayOfPeople)
 const createManyPeople = (arrayOfPeople, done) => {
-  new Person.create(arrayOfPeople, function (err, data) {
+  Person.create(arrayOfPeople, function (err, data) {
     err ? console.error(err) : console.log(`${data.name} saved to database`);
     done(null, data);
   });
