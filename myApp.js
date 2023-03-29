@@ -32,6 +32,8 @@ const createAndSavePerson = (done) => {
   });
 };
 
+//Use model.create() para añadir varios datos a la vez
+
 let arrayOfPeople = [
   {
     name: "Grisell Lopez",
@@ -56,6 +58,10 @@ const createManyPeople = (arrayOfPeople, done) => {
     done(null, data);
   });
 };
+
+//Use model.find() para buscar en su base de datos
+
+let personName=/\s(sojo)$/ //Personas cuyo apellido es Sojo
 
 const findPeopleByName = (personName, done) => {
   Person.find({name:personName},(err,data)=>{
