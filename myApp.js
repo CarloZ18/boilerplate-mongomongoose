@@ -61,51 +61,60 @@ const createManyPeople = (arrayOfPeople, done) => {
 
 //Use model.find() para buscar en su base de datos todos los documentos que coinciden
 
-let personName=/^(freddy)/i //Personas cuyo apellido es Sojo
+let personName = /^(freddy)/i; //Personas cuyo apellido es Sojo
 
 const findPeopleByName = (personName, done) => {
-  Person.find({name:personName},(err,data)=>{
+  Person.find({ name: personName }, (err, data) => {
     err ? console.error(err) : console.log(`${data.name} finded to database`);
-   done(null, data);
- })
+    done(null, data);
+  });
 };
 
 //Use model.findOne() para devolver un único documento coincidente de su base de datos
 
-let food=/parrilla/i
+let food = /parrilla/i;
 
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods:food},(err,data)=>{
+  Person.findOne({ favoriteFoods: food }, (err, data) => {
     err ? console.error(err) : console.log(`${data.name} finded to database`);
-   done(null, data);
- })
-}
+    done(null, data);
+  });
+};
 
 //Use model.findById() para devolver un único documento coincidente con el id de su base de datos
 
-let personId=1;
+let personId = 1;
 
 const findPersonById = (personId, done) => {
-  Person.findById({_id:personId},(err,data)=>{
+  Person.findById({ _id: personId }, (err, data) => {
     err ? console.error(err) : console.log(`${data.name} finded to database`);
-   done(null, data);
- })
+    done(null, data);
+  });
 };
 
 //Realice actualizaciones clásicas ejecutando Buscar, Editar y luego Guardar
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-  Person.findById({_id:personId},(err,data)=>{
+  let personModify = new Person.findById({ _id: personId }, (err, data) => {
     err ? console.error(err) : data.favoriteFoods.push(foodToAdd);
- done(null, data)
-  }).save() 
+  });
+  personModify.save(done(null, personModify));
 };
+
+//Realizar nuevas actualizaciones en un documento usando model.findOneAndUpdate()
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findOneAndUpdate(
+    { name: personName },
+    { age: ageToSet },
+    { new: true },
+    (err, updateData) => {
+      err ? console.error(err) : console.log(`${updateData.name} modify`);
+      done(null, data);
+    }
+  );
 };
 
 const removeById = (personId, done) => {
