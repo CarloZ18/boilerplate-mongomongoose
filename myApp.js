@@ -81,6 +81,8 @@ const findOneByFood = (food, done) => {
  })
 }
 
+//Use model.findById() para devolver un único documento coincidente con el id de su base de datos
+
 let personId=1;
 
 const findPersonById = (personId, done) => {
@@ -90,10 +92,14 @@ const findPersonById = (personId, done) => {
  })
 };
 
+
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById({_id:personId},(err,data)=>{
+    err ? console.error(err) : data.favoriteFoods.push(foodToAdd);
+ }).save((err,data)=>{
+ done(null, data);
+ })
 };
 
 const findAndUpdate = (personName, done) => {
