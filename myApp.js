@@ -31,11 +31,25 @@ const createAndSavePerson = (done) => {
     done(null, data);
   });
 };
-
+let arrayOfPeople = [
+  {
+    name: "Grisell Lopez",
+    age: 21,
+    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
+  },
+  {
+    name: "Freddy Sojo",
+    age: 21,
+    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
+  },
+  {
+    name: "Carlos Mata",
+    age: 21,
+    favoriteFoods: ["Cachapa", "Mandocas", "Pasticho"],
+  },
+];
 const createManyPeople = (arrayOfPeople, done) => {
-  const manyPeople = new Person.create(arrayOfPeople);
-
-  manyPeople.save(function (err, data) {
+  new Person.create(arrayOfPeople, function (err, data) {
     err ? console.error(err) : console.log(`${data.name} saved to database`);
     done(null, data);
   });
