@@ -92,6 +92,7 @@ const findPersonById = (personId, done) => {
  })
 };
 
+//Realice actualizaciones clásicas ejecutando Buscar, Editar y luego Guardar
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
