@@ -142,10 +142,7 @@ Person.find({
   }).sort({name:1})
     .limit(2)
     .select({ name: 1,age:0, favoriteFoods: 1 })
-    .exec((err, data) => {
-      err ? console.error(err) : console.log("Users found : ", data);
-      done(null, data);
-    });
+    .exec(done(null, data));
 };
 
 /** **Well Done !!**
