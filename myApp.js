@@ -119,16 +119,18 @@ const findAndUpdate = (personName, done) => {
 
 //Eliminar un documento usando model.findByIdAndRemove
 const removeById = (personId, done) => {
-Person.findByIdAndRemove({ _id: personId }, (err, data) => {
+  Person.findByIdAndRemove({ _id: personId }, (err, data) => {
     err ? console.error(err) : console.log("Removed User : ", data);
-    done(null, data)
+    done(null, data);
   });
 };
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({ name: nameToRemove }, (err, date) => {
+    err ? console.error(err) : console.log("Removed User : ", data);
+    done(null, data);
+  });
 };
 
 const queryChain = (done) => {
