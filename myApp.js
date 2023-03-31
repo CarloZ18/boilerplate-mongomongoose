@@ -141,7 +141,10 @@ const queryChain = (done) => {
     .sort({ name: -1 })
     .limit(2)
     .select({ name: 1, favoriteFoods: 1 })
-    .exect(done(null, queryFind));
+    .exect((err,data)=>{
+      err ? console.error(err) : console.log("Users found : ", data);
+      done(null,data)
+    })
 };
 
 /** **Well Done !!**
