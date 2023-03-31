@@ -137,7 +137,7 @@ const removeManyPeople = (done) => {
 //Ayudantes de consulta de búsqueda en cadena para reducir los resultados de búsqueda
 const queryChain = (done) => {
   const foodToSearch = "burrito";
- let findData=Person.find({
+Person.find({
     favoriteFoods: foodToSearch,
   }).sort({name:1})
     .limit(2)
