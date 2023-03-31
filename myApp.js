@@ -111,14 +111,18 @@ const findAndUpdate = (personName, done) => {
     { age: ageToSet },
     { new: true },
     (err, updateData) => {
-      err ? console.error(err) : console.log(`${updateData.name} modify`);
+      err ? console.error(err) : console.log(`${updateData} age modify`);
       done(null, data);
     }
   );
 };
 
+//Eliminar un documento usando model.findByIdAndRemove
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+Person.findByIdAndRemove({ _id: personId }, (err, data) => {
+    err ? console.error(err) : console.log("Removed User : ", data);
+    done(null, data)
+  });
 };
 
 const removeManyPeople = (done) => {
