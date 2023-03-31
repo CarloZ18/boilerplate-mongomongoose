@@ -117,7 +117,7 @@ const findAndUpdate = (personName, done) => {
   );
 };
 
-//Eliminar un documento usando model.findByIdAndRemove
+//Eliminar un documento usando model.findByIdAndRemove()
 const removeById = (personId, done) => {
   Person.findByIdAndRemove({ _id: personId }, (err, data) => {
     err ? console.error(err) : console.log("Removed User : ", data);
@@ -125,6 +125,7 @@ const removeById = (personId, done) => {
   });
 };
 
+////Eliminar varios documentos usando model.remove()
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
   Person.remove({ name: nameToRemove }, (err, data) => {
@@ -133,10 +134,14 @@ const removeManyPeople = (done) => {
   });
 };
 
+//Ayudantes de consulta de búsqueda en cadena para reducir los resultados de búsqueda
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
-  done(null /*, data*/);
+  const queryFind=Person.find({ favoriteFoods: foodToSearch })
+    .sort({ name: -1 })
+    .limit(2)
+    .select({ name: 1, favoriteFoods: 1 })
+    .exect(done(null, queryFind));
 };
 
 /** **Well Done !!**
