@@ -137,12 +137,16 @@ const removeManyPeople = (done) => {
 //Ayudantes de consulta de búsqueda en cadena para reducir los resultados de búsqueda
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-Person.find({
+  Person.find({
     favoriteFoods: foodToSearch,
-  }).sort({name:1})
+  })
+    .sort({ name: 1 })
     .limit(2)
-    .select({ name: 1,age:0, favoriteFoods: 1 })
-    .exec(done(null, data));
+    .select({ name: 1, favoriteFoods: 1 })
+    .exec((err, data) => {
+      err ? console.error(err) : console.log("Users found : ", data);
+      done(null, data);
+    });
 };
 
 /** **Well Done !!**
